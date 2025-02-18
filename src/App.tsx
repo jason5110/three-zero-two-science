@@ -1,10 +1,15 @@
 import '@/App.css'
 
-function App() {
+import Qrcode from '@/components/Qrcode'
+import ScienceContainer from '@/components/ScienceContainer'
+import AppWrapper from '@/containers/AppWrapper'
+
+const App = () => {
   return (
-    <>
-      <div>Home</div>
-    </>
+    <AppWrapper>
+      <Qrcode />
+      <ScienceContainer />
+    </AppWrapper>
   )
 }
 
