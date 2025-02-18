@@ -3,8 +3,9 @@ import { PropsWithChildren, ReactNode } from "react";
 
 import CloseButton from "@/components/CloseButton";
 
-const Wrapper = styled.div<{ $num: number }>`
+const Wrapper = styled.div<{ $num: number, $hidden?: boolean }>`
   grid-column: ${props => `span ${props.$num} / span 13` || "span 13 / span 13"};
+  visibility: ${props => props.$hidden ? "hidden" : "visible"};
 
   @media (width < 48rem) {
     grid-column: span 13 / span 13;
@@ -49,7 +50,9 @@ interface GridThirteenItemCardProps extends PropsWithChildren {
   className?: string;
   header?: ReactNode
   title?: string;
+  hidden?: boolean;
   num: number;
+  closeButtonClick?: () => void;
 }
 
 const isValidNum = (num: number) => num >= 0 && num <= 13;
@@ -58,17 +61,19 @@ const GridThirteenItemCard = ({
   className,
   header,
   title,
+  hidden,
   num,
+  closeButtonClick,
   children
 }: GridThirteenItemCardProps) => {
   const normalizedNum = isValidNum(num) ? num : 13;
   const aspectRatio = normalizedNum == 6 ? "6 / 7" : undefined;
 
   return (
-    <Wrapper $num={normalizedNum} className={className}>
+    <Wrapper $num={normalizedNum} $hidden={hidden} className={className}>
       <Card $aspectRatio={aspectRatio}>
         <CardContainer>
-          <RightTopCloseButton />
+          <RightTopCloseButton onClick={closeButtonClick}/>
           <Header>
             {header}
           </Header>

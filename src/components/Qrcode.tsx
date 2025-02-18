@@ -4,6 +4,7 @@ import { QRCodeSVG } from 'qrcode.react';
 import GridThirteenItemCard from "@/components/GridThirteenItemCard";
 import BackToClassListButton from "@/components/BackToClassListButton";
 import CopyTextButton from "@/components/CopyTextButton";
+import useInvisable from "@/hooks/useInvisable";
 
 const CopyTextContainer = styled.div`
   display: flex;
@@ -36,11 +37,15 @@ const Footer = styled.div`
 const Qrcode = () => {
   const linkText = 'https://www.classswift.viewsonic.io/'
 
+  const {invisable, setInvisable} = useInvisable()
+
   return (
     <GridThirteenItemCard
       header={<BackToClassListButton />}
       num={6}
       title="Join 302 Science"
+      hidden={invisable}
+      closeButtonClick={() => setInvisable(true)}
     >
       <CopyTextContainer>
         <CopyTextButton
