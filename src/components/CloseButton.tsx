@@ -7,10 +7,9 @@ import { HtmlButtonType } from '@/libs/types';
 const ClossButtonWrapper = styled.button`
   border: none;
   background-color: transparent;
-
   width: 2rem;
   height: 2rem;
-  
+  cursor: pointer;
   color: black;
 
   &:hover {

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronLeft, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 import { HtmlButtonType } from '@/libs/types';
 
@@ -8,7 +8,6 @@ const BackToClassListButtonWrapper = styled.button`
   display: flex;
   border: none;
   background-color: transparent;
-  
   color: black;
 
   &:hover {

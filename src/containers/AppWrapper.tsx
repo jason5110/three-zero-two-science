@@ -11,7 +11,6 @@ const GridWrapper = styled.div`
   margin: 0.5rem;
   display: grid;
   grid-template-columns: repeat(13, minmax(0, 1fr));
-
   width: 100%;
   gap: 0.5rem;
 `;
