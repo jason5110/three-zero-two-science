@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { PropsWithChildren, ReactNode } from "react";
+import { isString } from "lodash-es";
 
 import CloseButton from "@/components/CloseButton";
 
@@ -36,7 +37,7 @@ const Header = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 1.5em;
+  font-size: 1.2em;
   color: black;
 `;
 
@@ -49,7 +50,7 @@ const RightTopCloseButton = styled(CloseButton)`
 interface GridThirteenItemCardProps extends PropsWithChildren {
   className?: string;
   header?: ReactNode
-  title?: string;
+  title?: ReactNode | string;
   hidden?: boolean;
   num: number;
   closeButtonClick?: () => void;
@@ -69,6 +70,8 @@ const GridThirteenItemCard = ({
   const normalizedNum = isValidNum(num) ? num : 13;
   const aspectRatio = normalizedNum == 6 ? "6 / 7" : undefined;
 
+  const titleElement = isString(title) ? <Title>{title}</Title> : title;
+
   return (
     <Wrapper $num={normalizedNum} $hidden={hidden} className={className}>
       <Card $aspectRatio={aspectRatio}>
@@ -77,7 +80,7 @@ const GridThirteenItemCard = ({
           <Header>
             {header}
           </Header>
-          {title && <Title>{title}</Title>}
+          {titleElement}
           {children}
         </CardContainer>
       </Card>
