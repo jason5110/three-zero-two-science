@@ -44,6 +44,7 @@ const Modal = ({ show, close }: ModalProps) => {
     <ModalWrapper>
       <ModalContent>
         <CustomCloseButton onClick={close}/>
+        <h1>您好！</h1>
       </ModalContent>
     </ModalWrapper>
   )

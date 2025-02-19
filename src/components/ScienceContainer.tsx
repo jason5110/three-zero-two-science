@@ -4,11 +4,12 @@ import { map } from "lodash-es";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsisVertical, faUserAlt } from "@fortawesome/free-solid-svg-icons";
 
+import { activeColor } from "@/libs/colors";
 import GridThirteenItemCard from "@/components/GridThirteenItemCard";
 import useInvisable from "@/hooks/useInvisable";
 import StudentListContainer from "@/components/StudentListContainer";
-import { activeColor } from "@/libs/colors";
 import Modal from "@/components/Modal";
+import GroupStudentListContainer from "@/components/GroupStudentListContainer";
 
 
 const TitleContainer = styled.div`
@@ -103,6 +104,9 @@ const ScienceContainer = () => {
   const tabs = ['Student List', 'Group']
   const isStudentList = useMemo(() => activeTabIndex === 0, [activeTabIndex])
 
+  const isGroupStudentList = useMemo(() => activeTabIndex === 1, [activeTabIndex])
+  
+
   const title = (
     <TitleContainer>
       <Title>302 Science</Title>
@@ -136,6 +140,7 @@ const ScienceContainer = () => {
         </TabActionsContainer>
         <TabContent>
           {isStudentList && <StudentListContainer />}
+          {isGroupStudentList && <GroupStudentListContainer />}
         </TabContent>
       </GridThirteenItemCard>
       <Modal

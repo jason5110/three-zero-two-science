@@ -24,8 +24,8 @@ const StudentListContainer = () => {
   return (
   <StudentListContainerWrapper>
     <StudentListGridContainer>
-      {map(students, (student, index) => (
-        <StudentListItem key={index} student={student}/>
+      {map(students, (student) => (
+        <StudentListItem key={student.index} student={student}/>
       ))}
     </StudentListGridContainer>
   </StudentListContainerWrapper>)

@@ -7,61 +7,41 @@ import useStudents from "@/hooks/useStudents";
 
 const StudentListItemWrapper = styled.div<{ $active?: boolean }>`
   display: flex;
-  flex-direction: column;
+  align-items: center;
   color: black;
-  aspect-ratio: 1;
   border-radius: 0.25rem;
   background-color: white;
   border-color: ${props => props.$active ? activeColor : 'lightgray'};
-  border-width: thin;
-  border-style: solid;
-  pointer-events: ${props => props.$active ? 'unset' : 'none'};
+  pointer-events: ${props => props.$active ? 'unset' : 'none'};  
 `
 
 const Header = styled.div<{ $active?: boolean }>`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background-color: ${props => props.$active ? activeColor : 'lightgray'};
-  color: white;
+  color: ${props => props.$active ? activeColor : 'lightgray'};
   font-size: 0.75rem;
   text-align: center;
+  width: 2.5rem;
 `
 
-const NameWrapper = styled.div<{ $active?: boolean }>`
-  flex: 2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-color: ${props => props.$active ? activeColor : 'lightgray'};
-  color: ${props => props.$active ? 'balck' : 'lightgray'};
-  border-width: thin;
-  border-top-style: solid;
-  border-bottom-style: solid;
-`
-
-const Name = styled.div`
+const Name = styled.div<{ $active?: boolean }>`
+  flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 100%;
-  text-align: center;
-  border: gray;
-  border-width: 1px;
+  text-align: left;
+  color: ${props => props.$active ? 'balck' : 'lightgray'};
 `
 
 const Footer = styled.div<{ $active?: boolean }>`
   flex: 0;
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  width: 100%;
   font-size: 0.75rem;
   text-align: center;
-  border: gray;
-  border-width: 1px;
+  margin-left: -0.25rem;
+
+  & > * {
+    margin-left: 0.25rem;
+  }
 `
 
 const Button = styled.button<{ $active?: boolean }>`
@@ -86,24 +66,24 @@ const DecrementButton = styled(Button) <{ $active?: boolean }>`
 `
 
 interface GroupStudentListItemProps {
+  className?: string
   student: Student
 }
 
-const GroupStudentListItem = ({ student: { index, name, amount, isUser } }: GroupStudentListItemProps) => {
+const GroupStudentListItem = ({ className, student: { index, name, amount, isUser } }: GroupStudentListItemProps) => {
   const { decrementAmountByStudentIndex, incrementAmountByStudentIndex } = useStudents()
 
   const activeDecrementButton = isUser && amount > 0
 
   return (
-    <StudentListItemWrapper $active={isUser}>
+    <StudentListItemWrapper $active={isUser} className={className}>
       <Header $active={isUser}>
         <div>{normalizeIndex(index + 1)}</div>
       </Header>
-      <NameWrapper $active={isUser}>
-        <Name>
-          {name}
-        </Name>
-      </NameWrapper>
+      <Name $active={isUser}>
+        {name}
+      </Name>
+
       <Footer>
         <DecrementButton $active={activeDecrementButton} onClick={() => decrementAmountByStudentIndex(index)}>-1</DecrementButton>
         <div>{amount}</div>
