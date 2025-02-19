@@ -6,3 +6,6 @@
 
 
 請用 Vite + React + Styled-Components  + Redux 實做出以下範例
+
+
+node version: v23.8.0
