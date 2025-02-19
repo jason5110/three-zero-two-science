@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
 
+import { activeColor } from '@/libs/colors';
+
 const CopyTextButtonWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -18,7 +20,7 @@ const Label = styled.div`
 
 const CopyIconWrapper = styled.button`
   border: none;
-  background-color: #098DF0;
+  background-color: ${activeColor};
   color: white;
   border-radius: 0.2rem;
   width: 1.5rem;

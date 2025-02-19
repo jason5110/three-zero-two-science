@@ -1,11 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
+import studentListReducer from '@/redux/slices/studentListStore'
 // ...
 
 export const store = configureStore({
   reducer: {
-    // posts: postsReducer,
-    // comments: commentsReducer,
-    // users: usersReducer
+    studentList: studentListReducer,
   }
 })
 

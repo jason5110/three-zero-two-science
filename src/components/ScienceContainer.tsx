@@ -1,11 +1,13 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { map } from "lodash-es";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsisVertical, faUserAlt } from "@fortawesome/free-solid-svg-icons";
 
 import GridThirteenItemCard from "@/components/GridThirteenItemCard";
 import useInvisable from "@/hooks/useInvisable";
+import StudentListContainer from "@/components/StudentListContainer";
+import { activeColor } from "@/libs/colors";
 
 
 const TitleContainer = styled.div`
@@ -47,7 +49,7 @@ const Tab = styled.button<{ $active?: boolean }>`
   border: none;
   border-bottom-style: ${props => props.$active ? 'unset' : "inset"};
   background-color: ${props => props.$active ? 'white' : "darkgray"};
-  color: ${props => props.$active ? '#098df0' : "2f3030"};
+  color: ${props => props.$active ? activeColor : "2f3030"};
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
   width: 6.5rem;
@@ -58,7 +60,7 @@ const Tab = styled.button<{ $active?: boolean }>`
 
   &:hover {
     background-color: white;
-    color: #098df0;
+    color: ${activeColor};
     opacity: 0.8;
   }
 `
@@ -69,8 +71,10 @@ const TabContent = styled.div`
   margin-bottom: -1rem;
   margin-left: -1rem;
   margin-right: -1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 0.5rem 0.25rem rgba(0, 0, 0, 0.25);
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  box-shadow: 0 0 0.125rem 0.025rem rgba(0, 0, 0, 0.25);
+  overflow: scroll;
 `
 
 const MunuButtonWrapper = styled.div`
@@ -93,6 +97,8 @@ const ScienceContainer = () => {
   const [activeTabIndex, setActiveTabIndex] = useState(0)
 
   const tabs = ['Student List', 'Group']
+  const isStudentList = useMemo(() => activeTabIndex === 0, [activeTabIndex])
+
   const title = (
     <TitleContainer>
       <Title>302 Science</Title>
@@ -103,6 +109,7 @@ const ScienceContainer = () => {
 
   return (
     <GridThirteenItemCard
+      className="className"
       num={7}
       hidden={invisable}
       title={title}
@@ -122,7 +129,9 @@ const ScienceContainer = () => {
           <FontAwesomeIcon icon={faEllipsisVertical} />
         </MunuButtonWrapper>
       </TabActionsContainer>
-      <TabContent />
+      <TabContent>
+        {isStudentList && <StudentListContainer />}
+      </TabContent>
     </GridThirteenItemCard>
   )
 }

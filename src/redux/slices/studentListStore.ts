@@ -1,12 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from '@/redux/store'
+import { ApiStudent, Student } from '@/libs/types'
+import { map } from 'lodash-es'
 
 // Define a type for the slice state
-type Student = {
-  name: string,
-  amount: number
-}
-
 export interface StudentListState {
   students: Student[]
 }
@@ -33,18 +29,29 @@ export const studentListSlice = createSlice({
         return
       }
 
+      if (state.students[action.payload].amount < 1) {
+        return
+      }
+
       state.students[action.payload].amount -= 1
     },
     // Use the PayloadAction type to declare the contents of `action.payload`
-    updateStudents: (state, action: PayloadAction<Student[]>) => {
-      state.students = action.payload
+    updateStudents: (state, action: PayloadAction<ApiStudent[]>) => {
+      const newStudents = action.payload
+
+      state.students = map(newStudents, (student, index) => ({
+        ...student,
+        isUser: student.name !== 'Guest',
+        index
+      }))
     }
   }
 })
 
-export const { incrementStudentAmount, decrementStudentAmount, updateStudents } = studentListSlice.actions
-
-// Other code such as selectors can use the imported `RootState` type
-export const selectCount = (state: RootState) => state.counter.value
+export const {
+  incrementStudentAmount,
+  decrementStudentAmount,
+  updateStudents
+} = studentListSlice.actions
 
 export default studentListSlice.reducer

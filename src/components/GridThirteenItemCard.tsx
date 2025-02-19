@@ -17,6 +17,7 @@ const Card = styled.div<{ $aspectRatio?: string }>`
   display: flex;
   flex-direction: column;
   width: 100%;
+  overflow: hidden;
 
   aspect-ratio: ${props => props.$aspectRatio || "1"};
 `;
@@ -29,6 +30,7 @@ const CardContainer = styled.div<{ $aspectRatio?: string }>`
   padding: 1rem;
   border-radius: 0.5rem;
   background-color: lightgray;
+  overflow: hidden;
 `;
 
 const Header = styled.div`
