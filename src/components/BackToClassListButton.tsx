@@ -9,6 +9,7 @@ const BackToClassListButtonWrapper = styled.button`
   border: none;
   background-color: transparent;
   color: black;
+  cursor: pointer;
 
   &:hover {
     opacity: 0.5;
