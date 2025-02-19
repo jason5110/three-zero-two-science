@@ -34,6 +34,7 @@ const Footer = styled.div`
   font-size: 0.8rem;
   margin-top: 0.5rem;
 `
+
 const Qrcode = () => {
   const linkText = 'https://www.classswift.viewsonic.io/'
 

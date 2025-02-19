@@ -8,6 +8,7 @@ import GridThirteenItemCard from "@/components/GridThirteenItemCard";
 import useInvisable from "@/hooks/useInvisable";
 import StudentListContainer from "@/components/StudentListContainer";
 import { activeColor } from "@/libs/colors";
+import Modal from "@/components/Modal";
 
 
 const TitleContainer = styled.div`
@@ -77,7 +78,9 @@ const TabContent = styled.div`
   overflow: scroll;
 `
 
-const MunuButtonWrapper = styled.div`
+const MunuButtonWrapper = styled.button`
+  border: none;
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,6 +98,7 @@ const MunuButtonWrapper = styled.div`
 const ScienceContainer = () => {
   const {invisable, setInvisable} = useInvisable()
   const [activeTabIndex, setActiveTabIndex] = useState(0)
+  const [showModal, setShowModal] = useState(false)
 
   const tabs = ['Student List', 'Group']
   const isStudentList = useMemo(() => activeTabIndex === 0, [activeTabIndex])
@@ -108,31 +112,37 @@ const ScienceContainer = () => {
   )
 
   return (
-    <GridThirteenItemCard
-      className="className"
-      num={7}
-      hidden={invisable}
-      title={title}
-      closeButtonClick={() => setInvisable(true)}
-    >
-      <TabActionsContainer>
-        <TabContainer>
-          {map(tabs, (tab, index) => (
-            <Tab
-              key={index}
-              $active={activeTabIndex === index}
-              onClick={() => setActiveTabIndex(index)}
-            >{tab}</Tab>
-          ))}
-        </TabContainer>
-        <MunuButtonWrapper>
-          <FontAwesomeIcon icon={faEllipsisVertical} />
-        </MunuButtonWrapper>
-      </TabActionsContainer>
-      <TabContent>
-        {isStudentList && <StudentListContainer />}
-      </TabContent>
-    </GridThirteenItemCard>
+    <>
+      <GridThirteenItemCard
+        className="className"
+        num={7}
+        hidden={invisable}
+        title={title}
+        closeButtonClick={() => setInvisable(true)}
+      >
+        <TabActionsContainer>
+          <TabContainer>
+            {map(tabs, (tab, index) => (
+              <Tab
+                key={index}
+                $active={activeTabIndex === index}
+                onClick={() => setActiveTabIndex(index)}
+              >{tab}</Tab>
+            ))}
+          </TabContainer>
+          <MunuButtonWrapper onClick={()=>setShowModal(true)}>
+            <FontAwesomeIcon icon={faEllipsisVertical} />
+          </MunuButtonWrapper>
+        </TabActionsContainer>
+        <TabContent>
+          {isStudentList && <StudentListContainer />}
+        </TabContent>
+      </GridThirteenItemCard>
+      <Modal
+        show={showModal}
+        close={()=>setShowModal(false)}
+      />
+    </>
   )
 }
 
